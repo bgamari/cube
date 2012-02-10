@@ -1,4 +1,3 @@
-import Debug.Trace
 import Data.Monoid
 import Data.Function
 import Data.Tuple
@@ -61,6 +60,11 @@ instance Invertible Dir3 where
 
 -- * Walking on a cube
   
+-- We use the projection,
+--    +y
+-- -x +z +x -z
+--    -y
+
 -- | The binary operator of a cube mapping
 -- This maps from a face and a two-dimentional direction in which to walk
 -- to a destination face
@@ -169,9 +173,10 @@ printSoln soln = do
   putStrLn ""
 
 main = do
-  let steps = iterate (uncurry walk) (pz,east)
-  --print $ take 8 steps
-  
   let start = State {face=pz, prong=0, direction=north}
       dest  = State {face=nz, prong=4, direction=south}
-  mapM_ printSoln $ sortBy (compare `on` length) $ take 1000 $ search dest start
+  
+  -- Solve from beginning to end
+  mapM_ printSoln $ sortBy (compare `on` length) $ take 10000 $ search dest start
+  -- Solve in reverse
+  --mapM_ printSoln $ sortBy (compare `on` length) $ take 10000 $ search start dest
