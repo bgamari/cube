@@ -172,6 +172,6 @@ main = do
   let steps = iterate (uncurry walk) (pz,east)
   --print $ take 8 steps
   
-  let start = State {face=pz, prong=0, direction=south}
-      dest  = State {face=nz, prong=4, direction=north}
-  mapM_ printSoln $ sortBy (compare `on` length) $ take 10 $ search dest start
+  let start = State {face=pz, prong=0, direction=north}
+      dest  = State {face=nz, prong=4, direction=south}
+  mapM_ printSoln $ sortBy (compare `on` length) $ take 1000 $ search dest start
