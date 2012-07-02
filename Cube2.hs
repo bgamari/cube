@@ -64,6 +64,7 @@ instance Invertible Dir3 where
 --    +y
 -- -x +z +x -z
 --    -y
+-- With north begin up and east being to the right
 
 -- | The binary operator of a cube mapping
 -- This maps from a face and a two-dimentional direction in which to walk
@@ -177,6 +178,6 @@ main = do
       dest  = State {face=nz, prong=4, direction=south}
   
   -- Solve from beginning to end
-  mapM_ printSoln $ sortBy (compare `on` length) $ take 10000 $ search dest start
+  mapM_ printSoln $ sortBy (compare `on` length) $ take 1000 $ search dest start
   -- Solve in reverse
   --mapM_ printSoln $ sortBy (compare `on` length) $ take 10000 $ search start dest
